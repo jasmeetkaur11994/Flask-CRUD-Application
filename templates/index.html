@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col md-12">
+            <div class="jumbotron p-3">
+                <h4>Manage <b>Students</b>  <button type="button" class="btn btn-success float-end"
+                data-bs-toggle="modal" data-bs-target="#mymodal">Add New Students</button></h4>
+
+                {%with messages = get_flashed_messages() %}
+                {%if messages%}
+                {%for message in messages%}
+                {{message}}
+                {%endfor%}
+                {%endif%}
+                {%endwith%}
+
+
+
+
+                <table class="table table-hover table-dark">
+                    <tr>
+                        <th>Student ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>DOB (Date of Birth)</th>
+                        <th>Amount Due</th>
+                        <th>Action</th>
+                    </tr>
+
+                    {% for row in students %}
+
+                    <tr>
+                        <td>{{row.0}}</td>
+                        <td>{{row.1}}</td>
+                        <td>{{row.2}}</td>
+                        <td>{{row.3}}</td>
+                        <td>{{row.4}}</td>
+                        <td>
+                            <a href="/update/{{row.0}}" class="btn btn-warning btn-xs" data-bs-toggle="modal"
+                               data-bs-target="#modaledit{{row.0}}">Edit</a>
+                            <a href="/delete/{{row.0}}" class="btn btn-danger btn-xs"
+                               onclick="return confirm('Are you sure to delete?')">Delete</a>
+                        </td>
+                    </tr>
+
+
+
+
+
+                    <!--Modal Edit-->
+                    <!--For Update-->
+
+                    <div id="modaledit{{row.0}}" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div calss="modal header">
+                                    <h5 class="modal-title">Update Student</h5>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ url_for('update') }}" method="POST">
+                                        <div class="form-group">
+                                            <label>Student ID:</label>
+
+                                            <input type="text" class="form-control" name="ID" required="1" value={{row.0}}>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>First Name:</label>
+
+                                            <input type="text" class="form-control" name="firstname" required="1" value="{{row.1}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Last Name:</label>
+
+                                            <input type="text" class="form-control" name="lastname" required="1" value="{{row.2}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Date of Birth</label>
+                                            <input type="date" class="form-control" name="DOB" required="1" value="{{row.3}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Amount Due:</label>
+                                            <input type="number" class="form-control" name="amount" required="1" value="{{row.4}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="btn btn-primary" type="submit">Update Student</button>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-secondary" type="submit" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {%endfor%}
+
+
+
+                </table>
+
+            </div>
+
+                 <!-- Modal Add Student-->
+                 <!--For Create-->
+            <div id="mymodal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div calss="modal header">
+                            <h5 class="modal-title">Add Student</h5>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{url_for('insert')}}" method="POST">
+                                <div class="form-group">
+                                    <label>Student ID:</label>
+
+                                    <input type="text" class="form-control" name="ID" required="1">
+                                </div>
+                                <div class="form-group">
+                                    <label>First Name:</label>
+
+                                    <input type="text" class="form-control" name="firstname" required="1">
+                                </div>
+                                <div class="form-group">
+                                    <label>Last Name:</label>
+
+                                    <input type="text" class="form-control" name="lastname" required="1">
+                                </div>
+                                <div class="form-group">
+                                    <label>Date of Birth</label>
+
+                                    <input type="date" class="form-control" name="DOB" required="1">
+                                </div>
+                                <div class="form-group">
+                                    <label>Amount Due:</label>
+
+                                    <input type="number" class="form-control" name="amount" required="1">
+                                </div>
+                                <div class="form-group">
+
+                                    <button class="btn btn-primary" type="submit">Add Student</button>
+                                </div>
+
+                                <div class="modal-footer">
+
+                                    <button class="btn btn-secondary" type="submit" data-dismiss="modal">Close</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+</div>
+
+{% endblock %}
