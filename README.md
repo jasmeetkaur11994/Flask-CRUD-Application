@@ -15,14 +15,14 @@ To run this application, you will need to have the following installed:
 1. Python 3.x
 2. XAMPP server
 3. MySQL
-4. After installing the necessary software, you can clone this repository and run the application by following these steps:
-4.1 Start the XAMPP server and MySQL.
-4.2 Create a new database in MySQL.
-4.3 Open the config.py file and modify the DATABASE_URI variable to match your MySQL database configuration.
-4.4 Open a terminal and navigate to the project directory.
-4.5 Install the required Python packages by running pip install -r requirements.txt.
-4.6 Run the application using the command python app.py.
-4.7 Open your web browser and go to http://localhost:5000 to access the application.
+4. After installing the necessary software, you can clone this repository and run the application by following these steps: <br>
+4.1 Start the XAMPP server and MySQL. <br>
+4.2 Create a new database in MySQL. <br>
+4.3 Open the config.py file and modify the DATABASE_URI variable to match your MySQL database configuration. <br>
+4.4 Open a terminal and navigate to the project directory. <br>
+4.5 Install the required Python packages. <br>
+4.6 Run the application using the command python app.py. <br>
+4.7 Open your web browser and go to http://localhost:5000 to access the application. <br>
 
 
 #### Acknowledgments
